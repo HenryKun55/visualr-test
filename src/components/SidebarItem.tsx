@@ -1,8 +1,8 @@
 import { cn } from "@/utils/classnames"
 import Link, { LinkProps } from "next/link"
-import { HTMLAttributes, forwardRef, useEffect, useRef } from "react"
+import { HTMLAttributes, forwardRef } from "react"
 import { VariantProps, tv } from "tailwind-variants"
-import autoAnimate from '@formkit/auto-animate'
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 const sidebarItem = tv({
   base: [
@@ -24,11 +24,7 @@ export interface SidebarItemProps extends LinkProps, HTMLAttributes<HTMLAnchorEl
 
 export const SidebarItem = forwardRef<LinkProps, SidebarItemProps>(
   ({ className, active, children, isLogo, ...props }, ref) => {
-    const parent = useRef(null)
-
-    useEffect(() => {
-      parent.current && autoAnimate(parent.current)
-    }, [parent])
+    const [parent] = useAutoAnimate<HTMLDivElement>()
 
     if (isLogo) return <div className="p-2 flex items-center justify-center bg-custom-orange-secondary/[.26] rounded-2xl">{children}</div>
 

@@ -14,6 +14,13 @@ export const Sidebar = () => {
 
   const menu = [
     {
+      name: 'Logo',
+      icon: (active: boolean) => <LogoIcon color={active ? 'white' : ''} />,
+      path: 'logo',
+      active: isActive('logo'),
+      isLogo: true,
+    },
+    {
       name: 'Home',
       icon: (active: boolean) => <HomeIcon color={active ? 'white' : ''} />,
       path: '/',
@@ -36,9 +43,8 @@ export const Sidebar = () => {
   return (
     <>
       <aside className="absolute top-0 left-0 w-[104px] h-full flex flex-col items-center gap-6 p-6 rounded-2xl bg-background-secondary">
-      <LogoIcon />
-        {menu.map(({ name, path, active, icon }) => (
-          <SidebarItem key={name} href={path} active={active}>{icon(active)}</SidebarItem>
+        {menu.map(({ name, path, active, icon, isLogo }) => (
+          <SidebarItem key={name} href={path} active={active} isLogo={isLogo}>{icon(active)}</SidebarItem>
         ))}
       </aside>
     </>

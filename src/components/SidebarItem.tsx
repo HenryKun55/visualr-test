@@ -18,15 +18,19 @@ const sidebarItem = tv({
   }
 })
 
-export interface SidebarItemProps extends LinkProps, HTMLAttributes<HTMLAnchorElement>, VariantProps<typeof sidebarItem> { }
+export interface SidebarItemProps extends LinkProps, HTMLAttributes<HTMLAnchorElement>, VariantProps<typeof sidebarItem> {
+  isLogo?: boolean
+}
 
 export const SidebarItem = forwardRef<LinkProps, SidebarItemProps>(
-  ({ className, active, children, ...props }, ref) => {
+  ({ className, active, children, isLogo, ...props }, ref) => {
     const parent = useRef(null)
 
     useEffect(() => {
       parent.current && autoAnimate(parent.current)
     }, [parent])
+
+    if (isLogo) return <div className="p-2 flex items-center justify-center bg-custom-orange-secondary/[.26] rounded-2xl">{children}</div>
 
     return (
       <div ref={parent}>

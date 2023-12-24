@@ -5,45 +5,6 @@ import { forwardRef } from 'react'
 import type { VariantProps } from 'tailwind-variants'
 import { tv } from 'tailwind-variants'
 
-const loader = tv({
-  base: 'h-5 w-5 animate-spin',
-  variants: {
-    variant: {
-      primary: 'text-white',
-      secondary: 'text-black',
-      outlined: 'text-black',
-      ghost: 'text-black',
-      destructive: 'text-white',
-    },
-  },
-  defaultVariants: {
-    variant: 'primary',
-  },
-})
-
-interface LoadeProps extends ComponentPropsWithoutRef<'svg'>, VariantProps<typeof loader> { }
-
-const Loader = ({ variant, className, ...props }: LoadeProps) => {
-  return (
-    <svg
-      className={cn(loader({ variant, className }))}
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      {...props}
-    >
-      <title>Loader</title>
-      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-      <path
-        className="opacity-75"
-        fill="currentColor"
-        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-      />
-    </svg>
-  )
-}
-// ------------------------------------------------------------------------
-
 const button = tv({
   base: [
     'flex items-center justify-center ease-in duration-300 disabled:opacity-50 disabled:cursor-not-allowed',
@@ -94,11 +55,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const Comp = asChild ? Slot : 'button'
     return (
       <Comp ref={ref} className={cn(button({ variant, size, className, loading }))} {...props}>
-        {loading ? <Loader variant={variant} /> : children}
+        {children}
       </Comp>
     )
   },
 )
 
 Button.displayName = 'Button'
-Loader.displayName = 'Button.Loader'

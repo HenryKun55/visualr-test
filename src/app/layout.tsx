@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-background-primary">
+        <main className="flex min-h-screen bg-background-primary">
           <Sidebar />
           {children}
         </main>

@@ -42,7 +42,7 @@ export const Sidebar = () => {
 
   return (
     <>
-      <aside className="absolute top-0 left-0 w-[104px] h-screen flex flex-col items-center gap-6 p-6 rounded-2xl bg-background-secondary">
+      <aside className="w-[104px] h-screen flex flex-col items-center gap-6 p-6 rounded-2xl bg-background-secondary">
         {menu.map(({ name, path, active, icon, isLogo }) => (
           <SidebarItem key={name} href={path} active={active} isLogo={isLogo}>{icon(active)}</SidebarItem>
         ))}

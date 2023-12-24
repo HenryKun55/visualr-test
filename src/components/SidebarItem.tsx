@@ -1,0 +1,54 @@
+import { cn } from "@/utils/classnames"
+import Link, { LinkProps } from "next/link"
+import { HTMLAttributes, forwardRef, useEffect, useRef } from "react"
+import { VariantProps, tv } from "tailwind-variants"
+import autoAnimate from '@formkit/auto-animate'
+
+const sidebarItem = tv({
+  base: [
+    'relative inline-flex p-4 items-start rounded-lg bg-background-secondary'
+  ],
+  variants: {
+    active: {
+      true: [
+        'bg-custom-orange-primary text-white hover:bg-custom-orange-primary',
+      ],
+      false: 'hover:bg-background-primary'
+    }
+  }
+})
+
+export interface SidebarItemProps extends LinkProps, HTMLAttributes<HTMLAnchorElement>, VariantProps<typeof sidebarItem> { }
+
+export const SidebarItem = forwardRef<LinkProps, SidebarItemProps>(
+  ({ className, active, children, ...props }, ref) => {
+    const parent = useRef(null)
+
+    useEffect(() => {
+      parent.current && autoAnimate(parent.current)
+    }, [parent])
+
+    return (
+      <div ref={parent}>
+        {active ?
+          <div className="relative flex items-center justify-center">
+            <div className="absolute -top-3 -left-3 w-[92px] h-20 bg-background-primary rounded-tl-2xl rounded-bl-2xl" />
+            <div className="absolute -top-7 -right-6 w-4 h-4 bg-background-primary" />
+            <div className="absolute -top-7 -right-6 w-4 h-4 bg-background-secondary rounded-br-2xl" />
+            <div className="absolute -bottom-7 -right-6 w-4 h-4 bg-background-primary" />
+            <div className="absolute -bottom-7 -right-6 w-4 h-4 bg-background-secondary rounded-tr-2xl" />
+            <Link className={cn(sidebarItem({ className, active }))} {...props}>
+              {children}
+            </Link>
+          </div>
+          :
+          <Link className={cn(sidebarItem({ className, active }))} {...props}>
+            {children}
+          </Link>
+        }
+      </div>
+    )
+  },
+)
+
+SidebarItem.displayName = 'SidebarItem'

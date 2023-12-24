@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import './globals.css'
-
-const inter = Inter({ subsets: ['latin'] })
+import { Sidebar } from '@/components/Sidebar'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -16,7 +14,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body>
+        <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-background-primary">
+          <Sidebar />
+          {children}
+        </main>
+      </body>
     </html>
   )
 }

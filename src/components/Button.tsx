@@ -7,37 +7,17 @@ import { tv } from 'tailwind-variants'
 
 const button = tv({
   base: [
-    'flex items-center justify-center ease-in duration-300 disabled:opacity-50 disabled:cursor-not-allowed',
-    'focus:border-0 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-300 fw-500',
+    'flex flex-row items-center justify-center rounded-lg w-full cursor-pointer transition-all'
   ],
   variants: {
     variant: {
       primary: [
-        'bg-brand-primary-500 hover:bg-brand-primary-600 text-white',
+        'bg-custom-orange-secondary',
         'focus:bg-brand-primary-800 disabled:bg-brand-primary-500',
       ],
-      secondary: [
-        'bg-functional-soft-200 hover:bg-functional-soft-100 text-black',
-        'focus:bg-functional-soft-200 disabled:bg-functional-soft-100',
+      link: [
+        'text-custom-orange-primary hover:bg-custom-orange-primary hover:bg-opacity-[.16]',
       ],
-      outlined: [
-        'bg-white border border-functional-soft-100 hover:border-functional-soft-200',
-        'focus:bg-functional-soft-200 disabled:bg-white',
-      ],
-      ghost: 'bg-transparent hover:bg-functional-soft-100 focus:bg-functional-soft-100 disabled:bg-transparent',
-      destructive: [
-        'bg-feedback-error-700 hover:bg-feedback-error-800 text-white focus:bg-feedback-error-800',
-        'disabled:bg-functional-soft-100 disabled:text-black',
-      ],
-    },
-    size: {
-      sm: 'py-1.5 px-3 text-sm gap-1 rounded-lg min-w-[48px]',
-      md: 'py-2 px-4 text-base gap-2 rounded-xl min-w-[56px]',
-      lg: 'py-3 px-4 text-base gap-2 rounded-xl min-w-[163px]',
-      xl: 'py-4 px-5 text-base gap-2 rounded-xl min-w-[178px]',
-    },
-    loading: {
-      true: 'cursor-not-allowed align-items-center justify-center',
     },
   },
   defaultVariants: {
@@ -51,10 +31,10 @@ export interface ButtonProps extends ComponentPropsWithoutRef<'button'>, Variant
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ asChild, className, variant, size, children, loading = false, ...props }, ref) => {
+  ({ asChild, className, variant, children, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button'
     return (
-      <Comp ref={ref} className={cn(button({ variant, size, className, loading }))} {...props}>
+      <Comp ref={ref} className={cn(button({ variant, className }))} {...props}>
         {children}
       </Comp>
     )

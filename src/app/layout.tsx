@@ -1,6 +1,9 @@
-import type { Metadata } from 'next'
-import './globals.css'
 import { Sidebar } from '@/components/Sidebar'
+import type { Metadata } from 'next'
+import { Barlow } from 'next/font/google'
+import './globals.css'
+
+const barlow = Barlow({ subsets: ['latin'], weight: ['400', '500', '600', '700'] })
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -13,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={barlow.className}>
       <body>
         <main className="flex min-h-screen bg-background-primary">
           <Sidebar />

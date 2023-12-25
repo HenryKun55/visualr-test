@@ -3,6 +3,7 @@ import { ComponentPropsWithoutRef, forwardRef } from "react";
 import { VariantProps, tv } from "tailwind-variants";
 import { Button } from "./Button";
 import { AddIcon } from "@/assets/icons/Add";
+import { customOrangeSecondaryColor } from "@/utils/colors";
 
 const card = tv({
   slots: {
@@ -37,7 +38,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
           <span className={title()}>Spicy seasoned</span>
           <span className={price()}>$ 6.76</span>
           <Button variant="link" className="gap-2 py-[6px] px-[19.3px] text-sm font-semibold">
-            <AddIcon color="#EA7C69" />
+            <AddIcon color={customOrangeSecondaryColor} />
             Add to order
           </Button>
         </div>

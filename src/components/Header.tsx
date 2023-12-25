@@ -6,7 +6,7 @@ export const Header = () => {
   const theDate = new Date().toLocaleString(undefined, options).replace(',', '');
 
   return (
-    <section className="w-full flex items-center justify-between">
+    <section className="w-full flex flex-col items-start gap-4 justify-between sm:items-center sm:flex-row">
       <div className="flex flex-col">
         <h1 className="text-[28px] font-semibold text-white">Jaegar Resto</h1>
         <h3 className="text-base font-normal text-custom-gray-lighter">{theDate}</h3>

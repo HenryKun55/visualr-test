@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      boxShadow: {
+        'btn-primary': '0px 8px 24px 0px rgba(146, 136, 224, 0.30)'
+      },
       colors: {
         'background-primary': '#252836',
         'background-secondary': '#1F1D2B',

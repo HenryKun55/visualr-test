@@ -20,7 +20,9 @@ const input = tv({
     },
     size: {
       sm: 'w-12',
-      md: 'w-[220px]'
+      md: 'w-[220px]',
+      lg: 'w-[297px]',
+      full: 'w-full',
     },
     iconPosition: {
       left: 'pl-10',
@@ -31,7 +33,10 @@ const input = tv({
     },
   },
   compoundVariants: [
-
+    {
+      size: 'sm',
+      className: 'text-center'
+    }
   ],
   defaultVariants: {
     variant: 'default',

@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={barlow.className}>
       <body>
-        <main className="flex h-dvh bg-background-primary">
+        <main className="w-full flex h-dvh bg-background-primary">
           <Sidebar />
           {children}
         </main>

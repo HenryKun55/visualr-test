@@ -37,7 +37,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
           <Image alt="prato" src='/images/dishes/1.png' width={132} height={132} priority className={image()} />
           <span className={title()}>Spicy seasoned</span>
           <span className={price()}>$ 6.76</span>
-          <Button variant="link" className="gap-2 py-[6px] px-[19.3px] text-sm font-semibold">
+          <Button className="gap-2 py-[6px] px-[19.3px] text-sm font-semibold" size="full" variant="link" >
             <AddIcon color={customOrangeSecondaryColor} />
             Add to order
           </Button>

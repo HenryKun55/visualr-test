@@ -7,7 +7,7 @@ export const List = () => {
   const [parent] = useAutoAnimate();
   return (
     <div className="w-full pt-10">
-      <ul ref={parent} className="grid grid-cols-1 place-items-center gap-x-6 gap-y-[58px] md:grid-cols-3 sm:grid-cols-2">
+      <ul ref={parent} className="grid grid-cols-1 gap-x-6 gap-y-[58px] lg:grid-cols-3 md:grid-cols-2">
         <li>
           <Card />
         </li>

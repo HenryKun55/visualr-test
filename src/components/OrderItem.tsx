@@ -29,7 +29,6 @@ export const OrderItem = () => {
         <Input
           className='mr-6'
           size='sm'
-          defaultValue={qty}
           type='number'
           maxLength={2}
           pattern="/^-?\d+\.?\d*$/"

@@ -4,7 +4,7 @@ import { OrderItem } from "./OrderItem"
 
 export const Order = () => {
   return (
-    <section className="text-white h-full flex flex-col p-6 bg-background-secondary">
+    <section className="w-full min-w-max max-w-[409px] text-white h-full flex flex-col p-6 bg-background-secondary">
       <h2 className="text-xl pb-12">Order #2955</h2>
       <div className="flex justify-center items-center">
         <span className="text-base flex-1">Item</span>
@@ -34,3 +34,4 @@ export const Order = () => {
     </section>
   )
 }
+

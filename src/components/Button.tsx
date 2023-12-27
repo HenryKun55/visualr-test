@@ -7,12 +7,12 @@ import { tv } from 'tailwind-variants'
 
 const button = tv({
   base: [
-    'flex flex-row items-center justify-center rounded-lg cursor-pointer transition-all'
+    'flex flex-row items-center justify-center rounded-lg cursor-pointer transition-all p-[14px]'
   ],
   variants: {
     variant: {
       primary: [
-        'bg-custom-orange-secondary shadow-btn-primary',
+        'bg-custom-orange-primary',
         'hover:bg-[#FE907D]'
       ],
       link: [
@@ -20,7 +20,7 @@ const button = tv({
         'hover:bg-[#FE907D]'
       ],
       outlined: [
-        'border border-custom-orange-secondary hover:bg-custom-orange-secondary hover:bg-opacity-[.16]',
+        'text-custom-orange-primary border border-custom-orange-secondary hover:bg-custom-orange-secondary hover:bg-opacity-[.16]',
       ],
     },
     size: {
@@ -31,8 +31,17 @@ const button = tv({
     },
     disabled: {
       true: 'disabled:opacity-70 cursor-not-allowed'
+    },
+    shadow: {
+      true: 'shadow-btn'
     }
   },
+  compoundVariants: [
+    {
+      size: ['sm', 'md', 'lg'],
+      className: 'p-0'
+    }
+  ],
   defaultVariants: {
     size: 'full',
     variant: 'primary',

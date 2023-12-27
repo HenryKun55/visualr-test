@@ -6,7 +6,7 @@ import { tv } from 'tailwind-variants'
 
 const input = tv({
   base: [
-    'p-[14px] rounded-lg transition-all', 
+    'p-[14px] rounded-lg transition-all',
     'text-sm font-normal text-custom-gray-lighter  placeholder:text-[#898989] caret-white',
     'focus:outline-none'
   ],
@@ -14,7 +14,7 @@ const input = tv({
     variant: {
       default: [
         'bg-[#2D303E] border border-[#393C49]',
-        'hover:bg-[#373A48] hover:border-[#393C49]', 
+        'hover:bg-[#373A48] hover:border-[#393C49]',
         'focus:bg-[#1F1D2B] focus:border-custom-gray-light',
       ]
     },
@@ -62,10 +62,11 @@ const iconVariants = tv({
 export interface InputProps extends Omit<ComponentPropsWithoutRef<'input'>, 'size'>, VariantProps<typeof input> {
   inputClassName?: string
   icon?: ReactNode
+  label?: string
 }
 
 export const Input = forwardRef<ElementRef<'input'>, InputProps>(
-  ({ icon, iconPosition, inputClassName, className, variant, disabled, size, ...props }, ref) => {
+  ({ name, label, icon, iconPosition, inputClassName, className, variant, disabled, size, ...props }, ref) => {
     return (
       <div className={cn('relative', className)}>
         {icon && (
@@ -73,13 +74,19 @@ export const Input = forwardRef<ElementRef<'input'>, InputProps>(
             {icon}
           </div>
         )}
-        <input
-          className={cn(input({ iconPosition, variant, disabled, size }), inputClassName)}
-          ref={ref}
-          type="text"
-          disabled={disabled}
-          {...props}
-        />
+        <div className='flex flex-col gap-2'>
+          {label && (
+            <label className='text-sm font-medium text-white' htmlFor={name}>{label}</label>
+          )}
+          <input
+            className={cn(input({ iconPosition, variant, disabled, size }), inputClassName)}
+            ref={ref}
+            name={name}
+            type="text"
+            disabled={disabled}
+            {...props}
+          />
+        </div>
       </div>
     )
   },

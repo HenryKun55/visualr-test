@@ -1,14 +1,7 @@
-<div align="center">
-<h1 align="center">
-<br>VISUALR-TEST</h1>
-
-## 📖 Table of Contents
-
-- [📂 Repository Structure](#-repository-structure)
-- [🚀 Getting Started](#-getting-started)
-- [👏 Acknowledgments](#-acknowledgments)
-
----
+<h1>
+    <br>
+    VISUALR-TEST
+</h1>
 
 ## 📂 Repository Structure
 

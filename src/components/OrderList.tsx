@@ -27,6 +27,11 @@ export const OrderList = ({ showHeader = true }: OrderListProps) => {
         ref={parent}
         className="w-full h-full flex flex-col gap-6 overflow-auto py-6 border-border"
       >
+        {items.length === 0 && (
+          <div className="flex flex-1 justify-center items-center">
+            <h2>Empty</h2>
+          </div>
+        )}
         {items.map((item) => (
           <OrderItem key={item.id} item={item} />
         ))}

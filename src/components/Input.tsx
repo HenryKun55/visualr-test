@@ -76,7 +76,7 @@ export const Input =
         )}
         <div className='flex flex-col gap-2'>
           {label && (
-            <label className='text-sm font-medium text-white' id={name} htmlFor={name}>{label}</label>
+            <label className='text-sm font-medium text-white' htmlFor={name}>{label}</label>
           )}
           <input
             className={cn(input({ iconPosition, textCenter, disabled, size }), inputClassName)}

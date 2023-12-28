@@ -7,7 +7,8 @@ import { tv } from 'tailwind-variants'
 
 const button = tv({
   base: [
-    'flex flex-row items-center justify-center rounded-lg cursor-pointer transition-all p-[14px]'
+    'flex flex-row items-center justify-center rounded-lg cursor-pointer transition-all p-[14px]',
+    'text-sm font-semibold'
   ],
   variants: {
     variant: {
@@ -16,11 +17,12 @@ const button = tv({
         'hover:bg-[#FE907D]'
       ],
       link: [
-        'text-custom-orange-primary hover:bg-custom-orange-primary hover:bg-opacity-[.16]',
-        'hover:bg-[#FE907D]'
+        'text-custom-orange-primary',
+        'hover:bg-opacity-[.16] hover:bg-[#FE907D]'
       ],
       outlined: [
-        'text-custom-orange-primary border border-custom-orange-secondary hover:bg-custom-orange-secondary hover:bg-opacity-[.16]',
+        'text-custom-orange-primary border border-custom-orange-secondary',
+        'hover:bg-custom-orange-secondary hover:bg-opacity-[.16]',
       ],
     },
     size: {
@@ -53,10 +55,15 @@ export interface ButtonProps extends ComponentPropsWithoutRef<'button'>, Variant
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ asChild, className, size, variant, children, disabled, ...props }, ref) => {
+  ({ asChild, type = 'button', className, size, variant, children, disabled, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button'
     return (
-      <Comp ref={ref} className={cn(button({ variant, size, className, disabled }))} disabled={disabled} {...props}>
+      <Comp
+        ref={ref}
+        type={type}
+        className={cn(button({ variant, size, className, disabled }))}
+        disabled={disabled} {...props}
+      >
         {children}
       </Comp>
     )

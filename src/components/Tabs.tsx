@@ -1,11 +1,11 @@
 'use client'
 
+import { categories } from "@/store/products"
 import { cn } from "@/utils/classnames"
 import { createQueryString } from "@/utils/params"
 import Link, { LinkProps } from "next/link"
-import { usePathname, useSearchParams } from "next/navigation"
-import {HTMLAttributes } from "react"
-import { VariantProps, tv } from "tailwind-variants"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { HTMLAttributes, useEffect } from "react"
 
 type Tab = {
   id: number
@@ -13,52 +13,34 @@ type Tab = {
   type: string
 }
 
-const tab = tv({
-  slots: {
-    base: "group-hover:text-custom-gray-light transition-all",
-    bottom: "absolute -bottom-[14px] w-6/12 h-[3px] group-hover:bg-custom-gray-light rounded-md transition-all"
-  },
-  variants: {
-    active: {
-      true: "text-custom-orange-primary group-hover:text-custom-orange-primary"
-    }
-  },
-  compoundSlots: [
-    {
-      slots: ['base', 'bottom'],
-      active: true,
-      className: "group-hover:opacity-85"
-    }
-  ],
-  compoundVariants: [
-    {
-      active: true,
-      className: {
-        bottom: "bg-custom-orange-primary group-hover:bg-custom-orange-primary"
-      }
-    }
-  ]
-})
-
-
-interface TabProps extends LinkProps, HTMLAttributes<HTMLAnchorElement>, VariantProps<typeof tab> {
+interface TabProps extends LinkProps, HTMLAttributes<HTMLAnchorElement> {
   item: Tab
+  active: boolean
 }
 
 const Tab = ({ item, active, className, ...props }: TabProps) => {
-  const { base, bottom } = tab({ active, className })
   return (
     <>
-      <Link className={cn(base())} {...props}>
+      <Link className={cn(
+        "group-hover:text-custom-gray-light transition-all",
+        active && "text-custom-orange-primary group-hover:text-custom-orange-primary group-hover:opacity-85")}
+        {...props}
+      >
         {item.name}
       </Link>
-      <div className={cn(bottom())} />
+      <div className={cn(
+        "absolute -bottom-[14px] w-6/12 h-[3px]",
+        "group-hover:bg-custom-gray-light rounded-md transition-all",
+        active && "bg-custom-orange-primary group-hover:bg-custom-orange-primary group-hover:opacity-85")}
+      />
     </>
   )
 }
+
 // ------------------------------------------------------------------------
 
 export const Tabs = () => {
+  const { push } = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
@@ -95,13 +77,18 @@ export const Tabs = () => {
     },
   ]
 
-  const isActive = (tabType: string) => 
+  const isActive = (tabType: string) =>
     searchParams.get('tab') === tabType || pathname === ''
+
+  useEffect(() => {
+    if (!categories.includes(searchParams.get('tab') as string))
+      push(`${pathname}?${createQueryString(searchParams, 'tab', categories[0])}`)
+  }, [searchParams, pathname, push])
 
   return (
     <div className="text-sm font-semibold text-white border-b border-[#393C49] pb-[13px]">
       <ul className="flex flex-wrap gap-8 -mb-px">
-        {tabs.map((tab, index) => (
+        {tabs.map(tab => (
           <li key={tab.type} className="group relative">
             <Tab
               href={`${pathname}?${createQueryString(searchParams, 'tab', tab.type)}`}

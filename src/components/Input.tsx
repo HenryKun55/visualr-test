@@ -1,23 +1,18 @@
 import { cn } from '@/utils/classnames'
-import type { ComponentPropsWithoutRef, ElementRef, ReactNode } from 'react'
-import { forwardRef } from 'react'
+import type { ComponentPropsWithoutRef, ReactNode, ChangeEventHandler } from 'react'
+import { useFormContext } from 'react-hook-form'
 import type { VariantProps } from 'tailwind-variants'
 import { tv } from 'tailwind-variants'
 
 const input = tv({
   base: [
     'p-[14px] rounded-lg transition-all',
+    'bg-[#2D303E] border border-[#393C49]',
+    'hover:bg-[#373A48] hover:border-[#393C49]',
+    'focus:outline-none focus:bg-[#1F1D2B] focus:border-custom-gray-light',
     'text-sm font-normal text-custom-gray-lighter  placeholder:text-[#898989] caret-white',
-    'focus:outline-none'
   ],
   variants: {
-    variant: {
-      default: [
-        'bg-[#2D303E] border border-[#393C49]',
-        'hover:bg-[#373A48] hover:border-[#393C49]',
-        'focus:bg-[#1F1D2B] focus:border-custom-gray-light',
-      ]
-    },
     size: {
       sm: 'w-12',
       md: 'w-[220px]',
@@ -29,18 +24,15 @@ const input = tv({
       right: 'pr-10',
     },
     disabled: {
-      true: ['opacity-50 cursor-not-allowed'],
+      true: 'opacity-50 cursor-not-allowed',
     },
-  },
-  compoundVariants: [
-    {
-      size: 'sm',
-      className: 'text-center'
+    textCenter: {
+      true: 'text-center'
     }
-  ],
-  defaultVariants: {
-    variant: 'default',
   },
+  defaultVariants: {
+    size: 'md',
+  }
 })
 
 const iconVariants = tv({
@@ -49,9 +41,6 @@ const iconVariants = tv({
     iconPosition: {
       left: 'left-4',
       right: 'right-4',
-    },
-    errorOrWarning: {
-      true: '',
     },
   },
   defaultVariants: {
@@ -62,13 +51,24 @@ const iconVariants = tv({
 export interface InputProps extends Omit<ComponentPropsWithoutRef<'input'>, 'size'>, VariantProps<typeof input> {
   inputClassName?: string
   icon?: ReactNode
+  name: string
   label?: string
+  mask?: (value: string) => string
 }
 
-export const Input = forwardRef<ElementRef<'input'>, InputProps>(
-  ({ name, label, icon, iconPosition, inputClassName, className, variant, disabled, size, ...props }, ref) => {
+export const Input =
+  ({ name, label, icon, iconPosition, inputClassName, className, textCenter, disabled, onChange, size, mask, ...props }: InputProps) => {
+    const { register } = useFormContext()
+
+    const handleOnChange: ChangeEventHandler<HTMLInputElement> = event => {
+      if (mask) {
+        event.target.value = mask(event.target.value)
+      }
+      onChange?.(event)
+    }
+
     return (
-      <div className={cn('relative', className)}>
+      <div className={cn('relative', className, size === 'full' && 'w-full')}>
         {icon && (
           <div className={iconVariants({ iconPosition })}>
             {icon}
@@ -79,17 +79,15 @@ export const Input = forwardRef<ElementRef<'input'>, InputProps>(
             <label className='text-sm font-medium text-white' htmlFor={name}>{label}</label>
           )}
           <input
-            className={cn(input({ iconPosition, variant, disabled, size }), inputClassName)}
-            ref={ref}
-            name={name}
+            className={cn(input({ iconPosition, textCenter, disabled, size }), inputClassName)}
             type="text"
             disabled={disabled}
             {...props}
+            {...register(name, { onChange: handleOnChange })}
           />
         </div>
       </div>
     )
-  },
-)
+  }
 
 Input.displayName = 'Input'

@@ -1,5 +1,7 @@
 import type { Config } from 'tailwindcss'
 
+const sidebar = '104px'
+
 const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -8,6 +10,15 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      minWidth: {
+        sidebar
+      },
+      width: {
+        sidebar
+      },
+      inset: {
+        sidebar
+      },
       boxShadow: {
         btn: '0px 8px 24px 0px rgba(146, 136, 224, 0.30)'
       },

@@ -3,44 +3,79 @@
 import Image from 'next/image'
 import { Input } from './Input'
 import { Button } from './Button'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEventHandler, useEffect } from 'react'
 import { TrashIcon } from '@/assets/icons/Trash'
-import { customOrangeSecondaryColor } from '@/utils/colors'
+import { FormProvider, useForm } from 'react-hook-form'
+import { Item, useCartStore } from '@/store/cart'
+import { maskLimitDigits } from '@/utils/mask'
 
-export const OrderItem = () => {
-  const [qty, setQty] = useState('1')
+type OrderItemProps = {
+  item: Item
+}
 
-  const hasTwoNumbers = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target
-    if (value.length === 3) return false
-    setQty(value)
+export const OrderItem = ({ item }: OrderItemProps) => {
+  const formMethods = useForm({
+    defaultValues: {
+      quantity: item.quantity,
+      orderNote: item.orderNote
+    }
+  })
+  const editItem = useCartStore(state => state.editItem)
+  const removeItem = useCartStore(state => state.removeItem)
+
+  const onChangeQuantity: ChangeEventHandler<HTMLInputElement> = (event) => {
+    editItem({ ...item, quantity: parseInt(event.target.value) })
   }
 
+  const onChangeOrderNote: ChangeEventHandler<HTMLInputElement> = (event) => {
+    editItem({ ...item, orderNote: event.target.value })
+  }
+
+  useEffect(() => {
+    formMethods.setValue('orderNote', item.orderNote)
+  }, [formMethods.setValue, item.orderNote])
+
+  useEffect(() => {
+    formMethods.setValue('quantity', item.quantity)
+  }, [formMethods.setValue, item.quantity])
+
   return (
-    <div className='flex flex-col gap-[10px]'>
-      <div className='flex items-center'>
-        <div className='w-10 h-10 flex relative mr-2'>
-          <Image src='/images/dishes/1.png' alt='dishe' width={40} height={40} />
+    <FormProvider {...formMethods}>
+      <li className='flex flex-col gap-[10px]'>
+        <div className='flex items-center'>
+          <div className='w-10 h-10 flex relative mr-2'>
+            <Image src={`/images/dishes/${item.product.image}.png`} alt='dishe' width={40} height={40} />
+          </div>
+          <div className='flex flex-col gap-1 mr-auto'>
+            <span className='text-white text-sm font-medium'>{item.product.name}</span>
+            <span className='text-custom-gray-light text-xs font-medium'>
+              {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(item.product.price / 100)}
+            </span>
+          </div>
+          <Input
+            textCenter
+            size='sm'
+            name='quantity'
+            type='number'
+            className='mr-6'
+            mask={maskLimitDigits(2)}
+            onChange={onChangeQuantity}
+          />
+          <span className='text-white text-base font-medium'>
+            {
+              new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
+                .format(item.product.price * (item.quantity || 1) / 100)
+            }
+          </span>
         </div>
-        <div className='flex flex-col gap-1 mr-auto'>
-          <span className='text-white text-sm font-medium'>Spicy seasoned sea...</span>
-          <span className='text-custom-gray-light text-xs font-medium'>$ 2.29</span>
+        <div className='flex gap-4'>
+          <Input name='orderNote' className='flex-1' size='full' placeholder='Order Note...' onChange={onChangeOrderNote} />
+          <Button variant='outlined' size='sm' onClick={() => removeItem(item.id)} >
+            <TrashIcon className="text-custom-orange-primary" />
+          </Button>
         </div>
-        <Input
-          className='mr-6'
-          size='sm'
-          type='number'
-          maxLength={2}
-          pattern="/^-?\d+\.?\d*$/"
-          value={qty}
-          onChange={hasTwoNumbers}
-        />
-        <span className='text-white text-base font-medium'>$4.58</span>
-      </div>
-      <div className='flex gap-4'>
-        <Input className='flex-1' size='full' placeholder='Order Note...' />
-        <Button variant='outlined' size='sm' ><TrashIcon color={customOrangeSecondaryColor} /></Button>
-      </div>
-    </div>
+      </li>
+
+    </FormProvider>
   )
 }

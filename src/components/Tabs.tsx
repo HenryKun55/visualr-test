@@ -29,7 +29,7 @@ const Tab = ({ item, active, className, ...props }: TabProps) => {
         {item.name}
       </Link>
       <div className={cn(
-        "absolute -bottom-[14px] w-6/12 h-[3px]",
+        "absolute -bottom-3.5 w-6/12 h-[3px]",
         "group-hover:bg-custom-gray-light rounded-md transition-all",
         active && "bg-custom-orange-primary group-hover:bg-custom-orange-primary group-hover:opacity-85")}
       />

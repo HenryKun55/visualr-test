@@ -1,13 +1,13 @@
 'use client'
 
-import Image from 'next/image'
-import { Input } from './Input'
-import { Button } from './Button'
-import { ChangeEventHandler, useEffect } from 'react'
 import { TrashIcon } from '@/assets/icons/Trash'
-import { FormProvider, useForm } from 'react-hook-form'
 import { Item, useCartStore } from '@/store/cart'
 import { maskLimitDigits } from '@/utils/mask'
+import Image from 'next/image'
+import { ChangeEventHandler, useEffect } from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
+import { Button } from './Button'
+import { Input } from './Input'
 
 type OrderItemProps = {
   item: Item
@@ -41,7 +41,7 @@ export const OrderItem = ({ item }: OrderItemProps) => {
 
   return (
     <FormProvider {...formMethods}>
-      <li className='flex flex-col gap-[10px]'>
+      <li className='flex flex-col gap-2.5'>
         <div className='flex items-center'>
           <div className='w-10 h-10 flex relative mr-2'>
             <Image src={`/images/dishes/${item.product.image}.png`} alt='dishe' width={40} height={40} />

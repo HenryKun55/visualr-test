@@ -1,8 +1,8 @@
 'use client'
 
 import { useCartStore } from "@/store/cart";
-import { OrderItem } from "./OrderItem";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { OrderItem } from "./OrderItem";
 
 type OrderListProps = {
   showHeader?: boolean

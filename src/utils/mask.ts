@@ -1,6 +1,6 @@
 export const maskCurrency = (value?: string | number | null) =>
-  value && value !== 'R$'
-    ? `R$ ${String(value)
+  value && value !== '$'
+    ? `$ ${String(value)
       .replace(/\D/g, '')
       .replace(/(\d)(\d{2})$/, '$1.$2')
       .replace(/(?=(\d{3})+(\D))\B/g, ',')}`

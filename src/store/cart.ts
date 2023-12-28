@@ -1,6 +1,12 @@
 import { create } from 'zustand'
 import { Product } from './products'
 
+export type PaymentFormProps = {
+  name: string
+  icon: JSX.Element
+  form: JSX.Element
+}
+
 export type Item = {
   id: string
   product: Product
@@ -12,7 +18,7 @@ type State = {
   items: Item[]
   discount: number
   payment: boolean
-  methodSelected: string;
+  paymentForm?: PaymentFormProps;
   total: number
 }
 
@@ -21,7 +27,7 @@ type Actions = {
   removeItem: (itemId: string) => void
   editItem: (item: Item) => void
   togglePayment: () => void
-  handleMethod: (methodName: string) => void
+  handleMethod: (paymentForm: PaymentFormProps) => void
 }
 
 const calculateTotal = (items: Item[]) => {
@@ -35,7 +41,7 @@ export const useCartStore = create<State & Actions>((set) => ({
   discount: 0,
   payment: false,
   total: 0,
-  methodSelected: 'Credit Card',
+  paymentForm: undefined,
   addItem: (item) => {
     return set((state) => {
       const items = [...state.items]
@@ -62,5 +68,5 @@ export const useCartStore = create<State & Actions>((set) => ({
     return { ...state, items, total: calculateTotal(items) }
   }),
   togglePayment: () => set((state) => ({ ...state, payment: !state.payment })),
-  handleMethod: (methodSelected) => set((state) => ({ ...state, methodSelected }))
+  handleMethod: (paymentForm) => set((state) => ({ ...state, paymentForm: paymentForm }))
 }))

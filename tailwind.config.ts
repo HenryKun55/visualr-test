@@ -1,6 +1,8 @@
 import type { Config } from 'tailwindcss'
 
 const sidebar = '104px'
+const order = '409px'
+const payment = '409px'
 
 const config: Config = {
   content: [
@@ -11,18 +13,25 @@ const config: Config = {
   theme: {
     extend: {
       minWidth: {
-        sidebar
+        sidebar,
+        order,
+        payment
       },
       width: {
-        sidebar
+        sidebar,
+        order,
+        payment
       },
       inset: {
-        sidebar
+        sidebar,
+        order,
+        payment
       },
       boxShadow: {
         btn: '0px 8px 24px 0px rgba(146, 136, 224, 0.30)'
       },
       colors: {
+         
         border: '#393C49',
         'background-primary': '#252836',
         'background-secondary': '#1F1D2B',

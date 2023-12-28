@@ -1,10 +1,10 @@
 'use client'
 
-import { useAutoAnimate } from "@formkit/auto-animate/react"
-import { ProductCard } from "./Card";
 import { Category, categories, useProductsStore } from "@/store/products";
+import { useAutoAnimate } from "@formkit/auto-animate/react"
 import { useSearchParams } from "next/navigation";
 import { useMemo } from "react";
+import { ProductCard } from "./Card";
 
 export const ListProducts = () => {
   const [parent] = useAutoAnimate();

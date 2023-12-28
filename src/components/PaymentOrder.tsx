@@ -11,7 +11,7 @@ export const PaymentOrder = () => {
   const order = 'Order #2955'
 
   return (
-    <section className="text-white w-full h-full flex flex-col p-6 rounded-l-2xl bg-background-secondary md:min-w-[409px] md:max-w-max">
+    <section className="text-white w-full h-full flex flex-col p-6 rounded-l-2xl bg-background-secondary md:min-w-payment md:max-w-max">
       <div className="flex flex-col">
         <ArrowBackIcon className="mb-4 cursor-pointer text-white" onClick={() => togglePayment()} />
         <div className="flex justify-between items-center pb-6">

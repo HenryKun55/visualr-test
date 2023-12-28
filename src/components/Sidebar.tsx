@@ -12,6 +12,7 @@ import { SidebarItem } from "./SidebarItem"
 export const Sidebar = () => {
   const location = usePathname();
   const isActive = useCallback((pathname: string) => pathname === location, [location])
+  const classNameIcon = (active: boolean) => active ? '#fff' : 'text-custom-orange-primary'
 
   const menu = [
     {
@@ -23,19 +24,19 @@ export const Sidebar = () => {
     },
     {
       name: 'Home',
-      icon: (active: boolean) => <HomeIcon className={active ? '#fff' : 'text-custom-orange-primary'} />,
+      icon: (active: boolean) => <HomeIcon className={classNameIcon(active)} />,
       path: '/',
       active: isActive('/'),
     },
     {
       name: 'Dashboard',
-      icon: (active: boolean) => <DashboardIcon className={active ? '#fff' : 'text-custom-orange-primary'} />,
+      icon: (active: boolean) => <DashboardIcon className={classNameIcon(active)} />,
       path: '/dashboard',
       active: isActive('/dashboard'),
     },
     {
       name: 'Settings',
-      icon: (active: boolean) => <SettingsIcon className={active ? '#fff' : 'text-custom-orange-primary'} />,
+      icon: (active: boolean) => <SettingsIcon className={classNameIcon(active)} />,
       path: '/settings',
       active: isActive('/settings'),
     },

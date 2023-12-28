@@ -1,11 +1,11 @@
 'use client'
 
+import { AddIcon } from "@/assets/icons/Add";
+import { useCartStore } from "@/store/cart";
+import { Product } from "@/store/products";
+import { cn } from "@/utils/classnames";
 import Image from "next/image";
 import { Button } from "./Button";
-import { AddIcon } from "@/assets/icons/Add";
-import { cn } from "@/utils/classnames";
-import { Product } from "@/store/products";
-import { useCartStore } from "@/store/cart";
 
 type ProductCardProps = {
   className?: string
@@ -44,7 +44,7 @@ export const ProductCard = ({ product, className }: ProductCardProps) => {
         <span className='text-white text-sm font-normal'>
           {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(product.price / 100)}
         </span>
-        <Button className="gap-2 py-[6px] px-[19.3px] text-sm font-semibold" size="full" variant="link" onClick={handleItem} >
+        <Button className="gap-2 py-1.5 px-5 text-sm font-semibold" size="full" variant="link" onClick={handleItem} >
           <AddIcon className="text-custom-orange-primary" />
           Add to order
         </Button>

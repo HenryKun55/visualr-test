@@ -1,8 +1,8 @@
 'use client'
 
 import { useCartStore } from "@/store/cart"
-import { PaymentForm } from "./PaymentForm"
 import { PaymentOrder } from "./PaymentOrder"
+import { PaymentForm } from "./PaymentForm"
 
 export const Payment = () => {
   const togglePayment = useCartStore(state => state.togglePayment)

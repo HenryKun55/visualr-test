@@ -6,9 +6,9 @@ import { tv } from 'tailwind-variants'
 
 const input = tv({
   base: [
-    'p-[14px] rounded-lg transition-all',
-    'bg-[#2D303E] border border-[#393C49]',
-    'hover:bg-[#373A48] hover:border-[#393C49]',
+    'p-3.5 rounded-lg transition-all',
+    'bg-[#2D303E] border border-border',
+    'hover:bg-[#373A48] hover:border-border',
     'focus:outline-none focus:bg-[#1F1D2B] focus:border-custom-gray-light',
     'text-sm font-normal text-custom-gray-lighter  placeholder:text-[#898989] caret-white',
   ],

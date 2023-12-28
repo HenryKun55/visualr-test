@@ -7,7 +7,7 @@ import { tv } from 'tailwind-variants'
 
 const button = tv({
   base: [
-    'flex flex-row items-center justify-center rounded-lg cursor-pointer transition-all p-[14px]',
+    'flex flex-row items-center justify-center rounded-lg cursor-pointer transition-all p-3.5',
     'text-sm font-semibold'
   ],
   variants: {
@@ -55,13 +55,13 @@ export interface ButtonProps extends ComponentPropsWithoutRef<'button'>, Variant
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ asChild, type = 'button', className, size, variant, children, disabled, ...props }, ref) => {
+  ({ asChild, type = 'button', className, size, variant, children, disabled, shadow, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button'
     return (
       <Comp
         ref={ref}
         type={type}
-        className={cn(button({ variant, size, className, disabled }))}
+        className={cn(button({ variant, size, className, disabled, shadow }))}
         disabled={disabled} {...props}
       >
         {children}

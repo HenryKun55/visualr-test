@@ -3,5 +3,9 @@
   "extends": ["prettier"],
   "rules": {
     "prettier/prettier": "error"
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2020
   }
 }

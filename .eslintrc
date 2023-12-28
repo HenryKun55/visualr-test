@@ -1,11 +1,8 @@
 {
   "plugins": ["prettier"],
-  "extends": ["prettier", "plugin:@next/next/recommended"],
+  "extends": ["prettier"],
+  "parser": "@typescript-eslint/parser",
   "rules": {
     "prettier/prettier": "error"
-  },
-  "parserOptions": {
-    "sourceType": "module",
-    "ecmaVersion": 2020
   }
 }

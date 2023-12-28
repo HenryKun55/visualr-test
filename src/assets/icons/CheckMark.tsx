@@ -1,4 +1,4 @@
-import { SVGProps } from "react"
+import { SVGProps } from 'react';
 
 export const CheckMarkIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -16,4 +16,4 @@ export const CheckMarkIcon = (props: SVGProps<SVGSVGElement>) => (
       clipRule="evenodd"
     />
   </svg>
-)
+);

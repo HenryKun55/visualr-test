@@ -1,4 +1,4 @@
-import { SVGProps } from "react"
+import { SVGProps } from 'react';
 
 export const ArrowBackIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -8,7 +8,7 @@ export const ArrowBackIcon = (props: SVGProps<SVGSVGElement>) => (
     fill="none"
     {...props}
   >
-  <title>Back</title>
+    <title>Back</title>
     <path
       stroke="currentColor"
       strokeLinecap="round"
@@ -17,4 +17,4 @@ export const ArrowBackIcon = (props: SVGProps<SVGSVGElement>) => (
       d="M8.5 16.5 4 12m0 0 4.5-4.5M4 12h16"
     />
   </svg>
-)
+);

@@ -1,4 +1,4 @@
-import { SVGProps } from "react"
+import { SVGProps } from 'react';
 
 export const AddIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -17,4 +17,4 @@ export const AddIcon = (props: SVGProps<SVGSVGElement>) => (
       d="M10.5 2.5V10m0 7.5V10m0 0H18m-7.5 0H3"
     />
   </svg>
-)
+);

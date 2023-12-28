@@ -1,8 +1,12 @@
-import { cn } from '@/utils/classnames'
-import type { ComponentPropsWithoutRef, ReactNode, ChangeEventHandler } from 'react'
-import { useFormContext } from 'react-hook-form'
-import type { VariantProps } from 'tailwind-variants'
-import { tv } from 'tailwind-variants'
+import { cn } from '@/utils/classnames';
+import type {
+  ComponentPropsWithoutRef,
+  ReactNode,
+  ChangeEventHandler,
+} from 'react';
+import { useFormContext } from 'react-hook-form';
+import type { VariantProps } from 'tailwind-variants';
+import { tv } from 'tailwind-variants';
 
 const input = tv({
   base: [
@@ -27,13 +31,13 @@ const input = tv({
       true: 'opacity-50 cursor-not-allowed',
     },
     textCenter: {
-      true: 'text-center'
-    }
+      true: 'text-center',
+    },
   },
   defaultVariants: {
     size: 'md',
-  }
-})
+  },
+});
 
 const iconVariants = tv({
   base: 'absolute top-1/2 -translate-y-1/2',
@@ -46,48 +50,63 @@ const iconVariants = tv({
   defaultVariants: {
     iconPosition: 'left',
   },
-})
+});
 
-export interface InputProps extends Omit<ComponentPropsWithoutRef<'input'>, 'size'>, VariantProps<typeof input> {
-  inputClassName?: string
-  icon?: ReactNode
-  name: string
-  label?: string
-  mask?: (value: string) => string
+export interface InputProps
+  extends Omit<ComponentPropsWithoutRef<'input'>, 'size'>,
+    VariantProps<typeof input> {
+  inputClassName?: string;
+  icon?: ReactNode;
+  name: string;
+  label?: string;
+  mask?: (value: string) => string;
 }
 
-export const Input =
-  ({ name, label, icon, iconPosition, inputClassName, className, textCenter, disabled, onChange, size, mask, ...props }: InputProps) => {
-    const { register } = useFormContext()
+export const Input = ({
+  name,
+  label,
+  icon,
+  iconPosition,
+  inputClassName,
+  className,
+  textCenter,
+  disabled,
+  onChange,
+  size,
+  mask,
+  ...props
+}: InputProps) => {
+  const { register } = useFormContext();
 
-    const handleOnChange: ChangeEventHandler<HTMLInputElement> = event => {
-      if (mask) {
-        event.target.value = mask(event.target.value)
-      }
-      onChange?.(event)
+  const handleOnChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+    if (mask) {
+      event.target.value = mask(event.target.value);
     }
+    onChange?.(event);
+  };
 
-    return (
-      <div className={cn('relative', className, size === 'full' && 'w-full')}>
-        {icon && (
-          <div className={iconVariants({ iconPosition })}>
-            {icon}
-          </div>
+  return (
+    <div className={cn('relative', className, size === 'full' && 'w-full')}>
+      {icon && <div className={iconVariants({ iconPosition })}>{icon}</div>}
+      <div className="flex flex-col gap-2">
+        {label && (
+          <label className="text-sm font-medium text-white" htmlFor={name}>
+            {label}
+          </label>
         )}
-        <div className='flex flex-col gap-2'>
-          {label && (
-            <label className='text-sm font-medium text-white' htmlFor={name}>{label}</label>
+        <input
+          className={cn(
+            input({ iconPosition, textCenter, disabled, size }),
+            inputClassName
           )}
-          <input
-            className={cn(input({ iconPosition, textCenter, disabled, size }), inputClassName)}
-            type="text"
-            disabled={disabled}
-            {...props}
-            {...register(name, { onChange: handleOnChange })}
-          />
-        </div>
+          type="text"
+          disabled={disabled}
+          {...props}
+          {...register(name, { onChange: handleOnChange })}
+        />
       </div>
-    )
-  }
+    </div>
+  );
+};
 
-Input.displayName = 'Input'
+Input.displayName = 'Input';

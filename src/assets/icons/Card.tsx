@@ -1,4 +1,4 @@
-import { SVGProps } from "react"
+import { SVGProps } from 'react';
 
 export const CardIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -8,7 +8,7 @@ export const CardIcon = (props: SVGProps<SVGSVGElement>) => (
     fill="none"
     {...props}
   >
-  <title>Card</title>
+    <title>Card</title>
     <path
       fill="#3B5162"
       fillRule="evenodd"
@@ -16,4 +16,4 @@ export const CardIcon = (props: SVGProps<SVGSVGElement>) => (
       clipRule="evenodd"
     />
   </svg>
-)
+);

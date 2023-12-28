@@ -1,4 +1,4 @@
-import { SVGProps } from "react"
+import { SVGProps } from 'react';
 
 export const CreditCardIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -8,7 +8,7 @@ export const CreditCardIcon = (props: SVGProps<SVGSVGElement>) => (
     fill="none"
     {...props}
   >
-  <title>Credit Card</title>
+    <title>Credit Card</title>
     <path
       fill="currentColor"
       fillRule="evenodd"
@@ -16,4 +16,4 @@ export const CreditCardIcon = (props: SVGProps<SVGSVGElement>) => (
       clipRule="evenodd"
     />
   </svg>
-)
+);
